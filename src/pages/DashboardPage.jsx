@@ -154,8 +154,8 @@ function OutcomeDonut({ outcomes, selectedOutcome, onSelect, t, locale }) {
   let offset = 0;
 
   return (
-    <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-center sm:gap-5">
-      <div className="relative h-44 w-44 shrink-0 sm:h-48 sm:w-48">
+    <div className="flex w-full flex-col items-center gap-5 sm:flex-row sm:items-center sm:justify-center sm:gap-8 lg:gap-10">
+      <div className="relative h-56 w-56 shrink-0 md:h-64 md:w-64 lg:h-72 lg:w-72">
         <div
           className="pointer-events-none absolute inset-4 rounded-full blur-3xl transition-all duration-500"
           style={{ backgroundColor: `${selectedColor}22` }}
@@ -211,16 +211,16 @@ function OutcomeDonut({ outcomes, selectedOutcome, onSelect, t, locale }) {
 
         <button
           type="button"
-          className="donut-hub absolute inset-[2.65rem] flex flex-col items-center justify-center rounded-full border border-zinc-700/80 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_8px_32px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-zinc-600 sm:inset-[2.85rem]"
+          className="donut-hub absolute inset-[3.25rem] flex flex-col items-center justify-center rounded-full border border-zinc-700/80 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_8px_32px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-zinc-600 md:inset-[3.75rem] lg:inset-[4.25rem]"
           onClick={() => onSelect(null)}
         >
           <span
-            className="text-2xl font-extrabold tabular-nums tracking-tight"
+            className="text-2xl font-extrabold tabular-nums tracking-tight lg:text-3xl"
             style={{ color: selected.color }}
           >
             {selected.value.toLocaleString(locale)}
           </span>
-          <span className="mt-0.5 max-w-[6.5rem] truncate text-[10px] font-extrabold uppercase tracking-[0.12em] text-gd-muted">
+          <span className="mt-0.5 max-w-[7.5rem] truncate text-[10px] font-extrabold uppercase tracking-[0.12em] text-gd-muted lg:max-w-[8.5rem] lg:text-[11px]">
             {selectedLabel}
           </span>
           <span className="mt-1.5 rounded-full border border-zinc-700/80 bg-zinc-900/80 px-2.5 py-0.5 text-[10px] font-bold tabular-nums text-zinc-300">
@@ -229,7 +229,7 @@ function OutcomeDonut({ outcomes, selectedOutcome, onSelect, t, locale }) {
         </button>
       </div>
 
-      <div className="grid w-full min-w-0 flex-1 gap-1.5 sm:max-w-[13.5rem]">
+      <div className="grid w-full min-w-0 flex-1 gap-2 sm:max-w-[15rem] md:max-w-[17rem] lg:max-w-xs">
         {outcomes.map((item, index) => {
           const isSelected = selectedOutcome?.label === item.label;
           const percent = Math.round((item.value / total) * 100);

@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import { IoLogOut, IoPerson, IoShieldCheckmark } from "react-icons/io5";
+import { isAuthenticated, logout } from "./auth.js";
 import { AssignmentRulesIcon, AutomationIcon, DashboardIcon, LeadsIcon, PrintIcon, ReviewsIcon } from "./icons.jsx";
 import { CURRENT_DEALER } from "./data.jsx";
 import DecorativeSidebar from "./DecorativeSidebar.jsx";
@@ -19,6 +21,7 @@ import DealerDashboardPage from "./pages/DealerDashboardPage.jsx";
 import DealerLeadsPage from "./pages/DealerLeadsPage.jsx";
 import DealerLeadDetailPage from "./pages/DealerLeadDetailPage.jsx";
 import DealerReviewsPage from "./pages/DealerReviewsPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 
 const adminRoutes = [
   { path: "/analiz", labelKey: "nav.analytics", icon: DashboardIcon },
@@ -32,6 +35,11 @@ const dealerRoutes = [
   { path: "/bayi", labelKey: "nav.panel", icon: DashboardIcon },
   { path: "/bayi/leadler", labelKey: "nav.myLeads", icon: LeadsIcon },
   { path: "/bayi/anketler", labelKey: "nav.myReviews", icon: ReviewsIcon }
+];
+
+const portalModes = [
+  { id: "admin", labelKey: "app.admin", Icon: IoShieldCheckmark },
+  { id: "bayi", labelKey: "app.dealer", Icon: IoPerson }
 ];
 
 const pages = {
@@ -67,6 +75,7 @@ function normalizePath(pathname) {
 
 export default function App() {
   const { t, language } = useTranslation();
+  const [authenticated, setAuthenticated] = useState(isAuthenticated);
   const [pathname, setPathname] = useState(() => normalizePath(window.location.pathname));
   const [previousPathname, setPreviousPathname] = useState("");
   const [printingReport, setPrintingReport] = useState(false);
@@ -128,6 +137,20 @@ export default function App() {
     }
   }
 
+  function handleLogin() {
+    setAuthenticated(true);
+    navigate("/analiz");
+  }
+
+  function handleLogout() {
+    logout();
+    setAuthenticated(false);
+  }
+
+  if (!authenticated) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
   return (
     <>
     <div className={`flex min-h-screen bg-gd-page ${printingReport ? "no-print" : ""}`}>
@@ -135,20 +158,31 @@ export default function App() {
       <div className="min-w-0 flex-1 p-4">
       <div className="no-print mx-auto mb-4 flex min-w-0 max-w-[1560px] flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="break-words text-2xl font-bold text-zinc-100 md:text-3xl">{t("app.title")}</h1>
-        <div className="flex w-fit rounded-2xl border border-zinc-800 bg-black p-1 shadow-md">
-          {["admin", "bayi"].map((mode) => (
+        <div className="flex w-fit items-center gap-2">
+          <div className="flex rounded-2xl border border-zinc-800 bg-black p-1 shadow-md">
+          {portalModes.map(({ id, labelKey, Icon }) => (
             <button
-              key={mode}
-              className={`min-h-10 rounded-xl px-5 text-sm font-medium capitalize transition-all duration-300 ${
-                portalMode === mode ? "bg-zinc-100 text-zinc-950 shadow-sm" : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              key={id}
+              className={`inline-flex min-h-12 items-center gap-2.5 rounded-xl px-5 text-sm font-medium transition-all duration-300 sm:px-6 sm:text-base ${
+                portalMode === id ? "bg-zinc-100 text-zinc-950 shadow-sm" : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
               }`}
               type="button"
-              onClick={() => switchPortal(mode)}
-              aria-pressed={portalMode === mode}
+              onClick={() => switchPortal(id)}
+              aria-pressed={portalMode === id}
             >
-              {t(`app.${mode}`)}
+              <Icon size={26} className="shrink-0" />
+              {t(labelKey)}
             </button>
           ))}
+          </div>
+          <button
+            className="inline-flex min-h-12 items-center gap-2 rounded-2xl border border-zinc-800 bg-black px-4 text-sm font-medium text-zinc-300 shadow-md transition-all duration-300 hover:bg-zinc-800 hover:text-white"
+            type="button"
+            onClick={handleLogout}
+          >
+            <IoLogOut size={22} />
+            <span className="hidden sm:inline">{t("app.logout")}</span>
+          </button>
         </div>
       </div>
       <main className="mx-auto min-w-0 max-w-[1560px] rounded-2xl border border-gd-line bg-gd-shell p-4 shadow-2xl sm:p-6 lg:p-8">

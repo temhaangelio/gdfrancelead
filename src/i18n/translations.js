@@ -8,7 +8,17 @@ export const translations = {
       dealer: "Bayi",
       dealerView: "Bayi Görünümü",
       print: "Yazdır",
-      printPdf: "PDF Yazdır / İndir"
+      printPdf: "PDF Yazdır / İndir",
+      logout: "Çıkış"
+    },
+    login: {
+      subtitle: "Devam etmek için giriş yapın",
+      username: "Kullanıcı adı",
+      password: "Şifre",
+      usernamePlaceholder: "Kullanıcı adınızı girin",
+      passwordPlaceholder: "Şifrenizi girin",
+      submit: "Giriş yap",
+      error: "Kullanıcı adı veya şifre hatalı."
     },
     nav: {
       analytics: "Analiz",
@@ -461,7 +471,17 @@ export const translations = {
       dealer: "Dealer",
       dealerView: "Dealer View",
       print: "Print",
-      printPdf: "Print / Download PDF"
+      printPdf: "Print / Download PDF",
+      logout: "Log out"
+    },
+    login: {
+      subtitle: "Sign in to continue",
+      username: "Username",
+      password: "Password",
+      usernamePlaceholder: "Enter your username",
+      passwordPlaceholder: "Enter your password",
+      submit: "Sign in",
+      error: "Invalid username or password."
     },
     nav: {
       analytics: "Analytics",
@@ -914,7 +934,17 @@ export const translations = {
       dealer: "Concession",
       dealerView: "Vue Concession",
       print: "Imprimer",
-      printPdf: "Imprimer / Télécharger PDF"
+      printPdf: "Imprimer / Télécharger PDF",
+      logout: "Déconnexion"
+    },
+    login: {
+      subtitle: "Connectez-vous pour continuer",
+      username: "Nom d'utilisateur",
+      password: "Mot de passe",
+      usernamePlaceholder: "Entrez votre nom d'utilisateur",
+      passwordPlaceholder: "Entrez votre mot de passe",
+      submit: "Se connecter",
+      error: "Nom d'utilisateur ou mot de passe incorrect."
     },
     nav: {
       analytics: "Analyse",

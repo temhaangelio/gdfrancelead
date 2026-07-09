@@ -110,7 +110,7 @@ export default function DecorativeSidebar() {
           </div>
           <div className="m-2 mt-0 flex items-stretch justify-between gap-1 rounded-2xl border border-white/5 bg-white/20 p-2">
             <span className="flex w-full items-center justify-center rounded-xl py-3 text-zinc-300">
-              <IoPerson size={20} />
+              <IoPerson size={28} />
             </span>
             <span className="flex w-full items-center justify-center rounded-xl py-3 text-amber-300">
               <IoSunny size={22} />

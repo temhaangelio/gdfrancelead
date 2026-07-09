@@ -1,9 +1,7 @@
 const AUTH_KEY = "gd-lead-auth";
 
-export const STATIC_CREDENTIALS = {
-  username: "admin",
-  password: "gd2024"
-};
+const AUTH_USERNAME = import.meta.env.VITE_AUTH_USERNAME ?? "";
+const AUTH_PASSWORD = import.meta.env.VITE_AUTH_PASSWORD ?? "";
 
 export function isAuthenticated() {
   return localStorage.getItem(AUTH_KEY) === "true";
@@ -11,8 +9,10 @@ export function isAuthenticated() {
 
 export function login(username, password) {
   const valid =
-    username === STATIC_CREDENTIALS.username &&
-    password === STATIC_CREDENTIALS.password;
+    username === AUTH_USERNAME &&
+    password === AUTH_PASSWORD &&
+    AUTH_USERNAME !== "" &&
+    AUTH_PASSWORD !== "";
 
   if (valid) {
     localStorage.setItem(AUTH_KEY, "true");
